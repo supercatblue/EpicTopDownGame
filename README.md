@@ -2,5 +2,5 @@
 
 ##making a dungeon
 
-#aMONG US AT 3AM!!! (gone SEXUAL) (GONE SUSSY) (GONE DEADLY)
-##penis
+#aMONG US AT 3AM!!!  (GONE SUSSY) (GONE DEADLY)
+
