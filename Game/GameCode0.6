@@ -1,0 +1,161 @@
+import pygame
+import random
+import math
+import time
+from pygame.locals import *
+from sys import exit
+
+pygame.init()
+# 0 is no collisions, 1 is full collide, 2 is top, 3 is bottom, 4 is left, 5 is right, 6 is topleft, 7 is topright, 8 is bottomleft, 9 is bottomright
+colliderTiles0 = [
+[6,2,7,0],
+[4,0,5,0],
+[8,3,9,0],
+[1,1,0,1]]
+Running = 1
+FPSupdate = 0
+dTime = 0
+FPS = 60
+Xv, Yv = (0,0)
+MapX, MapY = (256, 256) #tiles in the map
+X, Y = (768, 768) #resolution, multiple of tilesize for best results
+Xp, Yp = (0, 0) #player start position, <= 0
+Mu, Md, Ml, Mr, Sr, Si, So = (0,0,0,0,0,0,0) #Move up, down, left, right, Special run, zoom in, zoom out
+spd = 0 #player speed start, set 0
+spdMult = 250 #how many pixels the player moves per second
+runMult = 500 # pixels per second for running
+tilesize = 96 #size of each tile in pixels
+Xlim, Ylim = (((MapX-(X/tilesize))*tilesize), ((MapY-(Y/tilesize))*tilesize)) # calculates the edges of the map
+tiles = [0] * 16 # tiles in the tileset
+clock = pygame.time.Clock() #unused from 0.02
+map = [[0 for i in range(MapX+3)] for j in range(MapY+3)] #Setup map for randomization
+#Randomize map for testing
+for x in range(MapX+3):
+    for y in range(MapY+3):
+        map[x][y] = random.randint(0,15)
+mapn = [
+[0 ,1 ,1 ,1 ,1 ,2 ,15,15,15,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,6 ,15,15,15,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,6 ,15,15,15,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,5 ,1 ,1 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,5 ,5 ,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,5 ,7 ,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,5 ,5 ,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,13,5 ,5 ,9 ,9 ,9 ,10,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,6 ,15,15,15,15,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,1 ,1 ,1 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,5 ,5 ,5 ,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,7 ,5 ,5 ,5 ,5 ,12,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[4 ,5 ,5 ,5 ,7 ,5 ,5 ,5 ,6 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[8 ,9 ,9 ,9 ,9 ,9 ,9 ,9 ,10,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0],
+[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0]]
+tileCt = len(map) * len(map[0])
+
+#setup main surface and load images
+scrn = pygame.display.set_mode((X, Y), pygame.RESIZABLE)
+pygame.display.set_caption('Universe 0.06')
+
+pygame.display.set_icon(pygame.image.load("Images/UniverseThumbnail.png").convert())
+img = pygame.image.load("Images/outdoors(FINISHED).png").convert()
+TextColor = (200,200,200)
+font = pygame.font.SysFont('Courier New', 32)
+text = font.render('FPS HERE', True, TextColor)
+textRect = text.get_rect()
+textRect.center = (80,20)
+#setup character
+#char0 = pygame.image.load("Images/UniverseThumbnail.png")
+#char0 = pygame.transform.scale(char0, (tilesize, tilesize))
+#charRect = char0.get_rect()
+#charRect.center = (X/2,X/2)
+for i in range(16):
+    qImg = pygame.Surface.subsurface(img, (16*(i%4),16*int(i/4),16,16))
+    tiles[i] = pygame.transform.scale(qImg, (tilesize, tilesize))
+    
+print ("Map Tile Count", tileCt)
+print ("Map Size", MapX,"by", MapY)
+#calcReps = int(math.sqrt(tileCt))
+
+    
+#Main Loop Start ------------------------------------------------------
+while Running:
+    FPSupdate += dTime
+        #Calculate movements, at the top so it doesn't crash on spawn
+    Xv = (Ml - Mr) * spd
+    Yv = (Mu - Md) * spd
+    Xp += Xv
+    Yp += Yv
+    Xp = abs(Xp-tilesize)+tilesize
+    Yp = abs(Yp)
+    if (Xp > Xlim):
+        Xp = Xlim
+    if (Yp > Ylim):
+        Yp = Ylim
+    #Update DeltaTime Calculator
+    oldTime = time.time()
+    #Draw tiles to surface
+    for y in range(int(Y/tilesize)+2):
+        for x in range(int(X/tilesize)+2):
+            scrn.blit(tiles[map[(y-int(Yp/tilesize))+int(MapY-9)][(x-int(Xp/tilesize))+int(MapX-9)]],(tilesize*x+(Xp%tilesize)-tilesize,tilesize*y+(Yp%tilesize)-tilesize))
+    if FPSupdate >= 0.2:
+        FPSupdate = 0
+        text = font.render(str(int(FPS))+ " FPS", True, TextColor)
+        textRect = text.get_rect()
+        textRect.center = (80,20)
+    #scrn.blit(char0, charRect)
+    scrn.blit(text, textRect)
+    #Take Keyboard Input and Event Handler
+    for event in pygame.event.get():
+        if (event.type == pygame.QUIT):
+            pygame.quit()
+            quit()
+        if (event.type == pygame.KEYDOWN):
+            if event.key == pygame.K_UP or event.key == ord('w'):
+                Mu = 1
+            if event.key == pygame.K_DOWN or event.key == ord('s'):
+                Md = 1
+            if event.key == pygame.K_LEFT or event.key == ord('a'):
+                Ml = 1
+            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                Mr = 1
+            if event.key == pygame.K_LSHIFT or event.key == pygame.K_KP0:
+                Sr = 1
+            #Test keys
+            if event.key == pygame.K_t:
+                Si = 1
+            if event.key == pygame.K_g:
+                So = 1
+        if (event.type == pygame.KEYUP):
+            if event.key == pygame.K_UP or event.key == ord('w'):
+                Mu = 0
+            if event.key == pygame.K_DOWN or event.key == ord('s'):
+                Md = 0
+            if event.key == pygame.K_LEFT or event.key == ord('a'):
+                Ml = 0
+            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+                Mr = 0
+            if event.key == pygame.K_LSHIFT or event.key == pygame.K_KP0:
+                Sr = 0
+            #Test Keys
+            if event.key == pygame.K_t:
+                Si = 0
+            if event.key == pygame.K_g:
+                So = 0
+    #DeltaTime calculation and disconnecting player speed from FPS
+    time.sleep(0.0000001)
+    #print(Xp, Yp)
+    dTime = time.time() - oldTime
+    if (Sr == 0):
+        spd = dTime * spdMult
+    if (Sr == 1):
+        spd = dTime * runMult
+    FPS = 1/dTime
+    pygame.display.update()
+
