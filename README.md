@@ -6,18 +6,18 @@
 ##graphics test render
 ![in-game](https://user-images.githubusercontent.com/111790695/223200916-92607365-d723-4a92-90f3-babd89c38787.png)
 Jobs!
-Alex Neeley
 
+Alex Neeley
 Game Tester
 
 Benjamin Bigwood
-Coder
+Game Developer
 
 Cole Cram
 Project Manager
 
 Jano Oyarzurn
-Main Coder
+UI/UX
 
 Xarek Lyman
-Graphic Design
+Multimedea Creator/ Implementor
