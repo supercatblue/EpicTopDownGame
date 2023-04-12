@@ -6,7 +6,7 @@
 ##graphics test render
 ![in-game](https://user-images.githubusercontent.com/111790695/223200916-92607365-d723-4a92-90f3-babd89c38787.png)
 
-[RUNABLE GAME CODE](https://github.com/supercatblue/EpicTopDownGame/blob/main/2nd_Game.rpg/sudocode/plan.txt)
+[RUNABLE GAME CODE]([https://github.com/supercatblue/EpicTopDownGame/blob/main/2nd_Game.rpg/sudocode/plan.txt](https://github.com/supercatblue/EpicTopDownGame/blob/main/2nd_Game.rpg/code/test.txt))
 
 
 Jobs
