@@ -21,6 +21,7 @@ UI/UX
 
 Xarek Lyman
 Multimedea Creator/ Implementor
-**
-Platform **
+
+Platform 
 Processing Python
+
