@@ -9,30 +9,30 @@
 
 ![in-game](https://github.com/supercatblue/EpicTopDownGame/blob/main/Images/Screen%20Shot%202023-04-28%20at%2012.51.42%20PM.png?raw=true)
 
-##Game code
+## Game code
 
 [RUNABLE GAME CODE](https://github.com/supercatblue/EpicTopDownGame/blob/main/2nd_Game.rpg/code/test.txt)
 
 
-Jobs
+# Jobs
 
-Cole Cram
+## Cole Cram
 Project Manager/Developer
 
-Xarek Lyman
+## Xarek Lyman
 Multimedea Creator/ Implementor
 All Graphics and sound
 
-Benjamin Bigwood
+## Benjamin Bigwood
 Game Developer
 
-Alex Neeley
+## Alex Neeley
 Game Tester
 
-Jano Oyarzurn
+## Jano Oyarzurn
 UI/UX
 
 
-Platform 
+### Platform 
 Processing Python
 
