@@ -16,21 +16,22 @@
 
 Jobs
 
-Alex Neeley
-Game Tester
-
-Benjamin Bigwood
-Game Developer
-
 Cole Cram
-Project Manager
-
-Jano Oyarzurn
-UI/UX
+Project Manager/Developer
 
 Xarek Lyman
 Multimedea Creator/ Implementor
 All Graphics and sound
+
+Benjamin Bigwood
+Game Developer
+
+Alex Neeley
+Game Tester
+
+Jano Oyarzurn
+UI/UX
+
 
 Platform 
 Processing Python
