@@ -11,7 +11,7 @@ def setup():
     yspeed = 0
     tilesize = 80
     IsX, IsY = (8,8)
-    Xp, Yp = (0,0)
+    Xp, Yp = (238,204)
     print IsX,IsY
     MAP = [[0 for x in range(60)] for y in range(60)]
     chunks = [[0 for x in range(30)] for y in range(30)]
@@ -19,12 +19,16 @@ def setup():
     for y in range(IsY):
         for x in range(IsX):
             newimg[x+(y*IsX)] = img.get(x*tilesize,y*tilesize,tilesize,tilesize)
-    Cpw = int(random(1,10))
-    Cph = int(random(1,10))
-    Clh = int(random(1,10))
-    Clw = int(random(3,10))
+    Cpw = int(random(2,10))
+    Cph = int(random(2,10))
+    Clh = int(random(2,10))
+    Clw = int(random(2,10))
     print "RANDOM VALUES:", Cpw, Cph, Clh, Clw
     #render the walls of each room
+    print Clh
+    print Cph
+    
+
     for y in range(Clh):
         chunks[0][y] = 5
     for x in range(Cpw):
@@ -36,7 +40,7 @@ def setup():
     for y in range(Cph+Clh):
         chunks[Cpw+Clw][(Clh+Cph)-y] = 13
     for x in range(Cpw+Clw+1):
-        chunks[0+x][0] = 8
+        chunks[x][0] = 8
     #make the corners into corners
     chunks[0][0] = 4
     chunks[0][Clh] = 6
@@ -44,7 +48,7 @@ def setup():
     chunks[Cpw][Cph+Clh] = 6
     chunks[Cpw+Clw][Cph+Clh] = 14
     chunks[Cpw+Clw][0] = 12
-    chunks[0][Clw/2] = 7
+    chunks[0][Clh/2] = 7
     #fill the room
     for x in range(Cpw+Clw-1):
         for y in range(Clh-1):
@@ -101,7 +105,7 @@ def setup():
     
 def draw():
     global Xp, Yp
-    print Xp, Yp
+    #print Xp, Yp
     Xp += xspeed
     Yp += yspeed
     ModXPrecalc = ((Xp%tilesize)-tilesize)+int(Xp/tilesize)
@@ -127,6 +131,4 @@ def keyReleased():
         yspeed = 0
     if key == 'a' or key == 'd' or key == 'A' or key == 'S':
         xspeed = 0
-
-
-
+        
