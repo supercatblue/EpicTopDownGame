@@ -1,11 +1,16 @@
 SX, SY = (1600,1600)
 def setup():
-    size(1600,1600)
+    imageMode(CENTER)
+    size(1600,1000)
     frameRate(120)
-    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw
+    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, play, on
     mapdraw = 0
     speed = 2
     img = loadImage("FINISHED TILESET (1) (1).png")
+    start = loadImage("SUB-TERRA (3).png")
+    #text1 = loadImage("")
+    play = False
+    on  = False
     #each image is 10x original size
     xspeed = 0
     yspeed = 0
@@ -13,6 +18,11 @@ def setup():
     IsX, IsY = (8,8)
     Xp, Yp = (238,204)
     print IsX,IsY
+    
+    #start screen
+    
+    
+    
     MAP = [[0 for x in range(60)] for y in range(60)]
     chunks = [[0 for x in range(30)] for y in range(30)]
     newimg = [0 for x in range(IsX*IsY)]
@@ -103,18 +113,40 @@ def setup():
     if mapdraw == 0:
         MAP = chunks
     
-def draw():
-    global Xp, Yp
-    #print Xp, Yp
-    Xp += xspeed
-    Yp += yspeed
-    ModXPrecalc = ((Xp%tilesize)-tilesize)+int(Xp/tilesize)
-    ModYPrecalc = (Yp%tilesize)-tilesize
-    for y in range((SY+tilesize)/tilesize):
-        calcY = y-int(Yp/tilesize)
-        for x in range((SX+tilesize)/tilesize):
-            image(newimg[MAP[calcY][x-int(Xp/tilesize)]],x*tilesize+ModXPrecalc,y*tilesize+ModYPrecalc)
+def startScreen():
+    global play
+    #global on
+    background(50)
+    fill(255, 250, 255)
+    textSize(20)
+    image(start,800,500)
+    text("CLICK TO START", width/2, (height/2)+100)
+    textAlign(CENTER)
+    #if hover(mouseX, mouseY) == 1:
+   #     fill(255)
+  #  else:
+ #       fil(0)
+    if (mousePressed):
+        play = True
+    
 
+def draw():
+    
+    if (play == False):
+        startScreen()
+    else:
+        global Xp, Yp
+        #print Xp, Yp
+        Xp += xspeed
+        Yp += yspeed
+        ModXPrecalc = ((Xp%tilesize)-tilesize)+int(Xp/tilesize)
+        ModYPrecalc = (Yp%tilesize)-tilesize
+        for y in range((SY+tilesize)/tilesize):
+            calcY = y-int(Yp/tilesize)
+            for x in range((SX+tilesize)/tilesize):
+                image(newimg[MAP[calcY][x-int(Xp/tilesize)]],x*tilesize+ModXPrecalc,y*tilesize+ModYPrecalc)
+       
+    
 def keyPressed():
     global xspeed, yspeed
     if key == 'w' or key == 'W':
@@ -132,3 +164,7 @@ def keyReleased():
     if key == 'a' or key == 'd' or key == 'A' or key == 'S':
         xspeed = 0
         
+#def hover(mx,  my):
+  # on = (mx > x-w/2 and mx < x+w/2 and my > y-h/2 and my < y+h/2)
+
+
