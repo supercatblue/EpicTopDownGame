@@ -20,9 +20,9 @@
 Project Manager/Developer
 
 ## Xarek Lyman
-Multimedea Creator/ Implementor
-All Graphics and sound
-Start screen logic
+### Multimedea Creator/ Implementor
+### All Graphics and sound
+### Start screen logic
 
 ## Benjamin Bigwood
 Game Developer
