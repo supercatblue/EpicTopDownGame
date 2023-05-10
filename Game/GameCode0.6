@@ -3,18 +3,16 @@ def setup():
     imageMode(CENTER)
     size(1600,1000)
     frameRate(120)
-    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir
+    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, quit1, quit2, play, on
     mapdraw = 1
     speed = 2
     img = loadImage("FINISHED TILESET (1) (1).png")
     start = loadImage("SUB-TERRA (3).png")
     text1 = loadImage("start.png")
     text2 = loadImage("start (1).png")
-    character = loadImage("box.png")
-    up = loadImage("up.png")
-    down = loadImage("down.png")
-    right = loadImage("right.png")
-    left = loadImage("left.png")
+    quit1 = loadImage("quit.png")
+    quit2 = loadImage("quit (1).png")
+    #text1 = loadImage("")
     play = False
     on  = False
     #each image is 10x original size
@@ -87,15 +85,21 @@ def startScreen():
     textSize(20)
     image(start,800,500)
     if (mouseX > 800-text1.width/2 and mouseX < 800+text1.width/2 and mouseY > 600-text1.height/2 and mouseY < 600+text1.height/2):
-        print('balls')
-        image(text2,800,600)
-
-
+        image(text2,800, 600 )
+    elif(mouseX > 800-text1.width/2 and mouseX < 800+text1.width/2 and mouseY > 600-text1.height/2 and mouseY < 600+text1.height/2):
+        if (mousePressed()):
+            play  = True
     else:
-        image(text1,800, 600 )
-    textAlign(CENTER)
-    if (mousePressed):
-        play = True
+        image(text1,800,600)
+    if (mouseX > 800-quit1.width/2 and mouseX < 800+quit1.width/2 and mouseY > 700-quit1.height/2 and mouseY < 700+quit1.height/2):
+        image(quit2,800, 700 )
+    elif(mousePressed and mouseX > 800-text1.width/2 and mouseX < 800+text1.width/2 and mouseY > 600-text1.height/2 and mouseY < 600+text1.height/2):
+        if (mousePressed()):
+            print("work")
+            exit()
+    else:
+        image(quit1,800,700)
+
     
 
 
