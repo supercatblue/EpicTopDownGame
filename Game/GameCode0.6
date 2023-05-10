@@ -3,14 +3,18 @@ def setup():
     imageMode(CENTER)
     size(1600,1000)
     frameRate(120)
-    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on
+    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir
     mapdraw = 1
     speed = 2
     img = loadImage("FINISHED TILESET (1) (1).png")
     start = loadImage("SUB-TERRA (3).png")
     text1 = loadImage("start.png")
     text2 = loadImage("start (1).png")
-    #text1 = loadImage("")
+    character = loadImage("box.png")
+    up = loadImage("up.png")
+    down = loadImage("down.png")
+    right = loadImage("right.png")
+    left = loadImage("left.png")
     play = False
     on  = False
     #each image is 10x original size
@@ -40,36 +44,37 @@ def setup():
     print Clh
     print Cph
     
-
+    biome = int(random(0,4))
     for y in range(Clh):
-        chunks[0][y] = 5
+        chunks[0][y] = 5+(biome*16)
     for x in range(Cpw):
-        chunks[x][Clh] = 10
+        chunks[x][Clh] = 10+(biome*16)
     for y in range(Cph):
-        chunks[Cpw][Clh+y] = 5
+        chunks[Cpw][Clh+y] = 5+(biome*16)
     for x in range(Clw):
-        chunks[Cpw+x][Clh+Cph] = 10
+        chunks[Cpw+x][Clh+Cph] = 10+(biome*16)
     for y in range(Cph+Clh):
-        chunks[Cpw+Clw][(Clh+Cph)-y] = 13
+        chunks[Cpw+Clw][(Clh+Cph)-y] = 13+(biome*16)
     for x in range(Cpw+Clw+1):
-        chunks[x][0] = 8
+        chunks[x][0] = 8+(biome*16)
     #make the corners into corners
-    chunks[0][0] = 4
-    chunks[0][Clh] = 6
-    chunks[Cpw][Clh] = 9
-    chunks[Cpw][Cph+Clh] = 6
-    chunks[Cpw+Clw][Cph+Clh] = 14
-    chunks[Cpw+Clw][0] = 12
-    chunks[0][Clh/2] = 7
+    
+    chunks[0][0] = 4+(biome*16)
+    chunks[0][Clh] = 6+(biome*16)
+    chunks[Cpw][Clh] = 9+(biome*16)
+    chunks[Cpw][Cph+Clh] = 6+(biome*16)
+    chunks[Cpw+Clw][Cph+Clh] = 14+(biome*16)
+    chunks[Cpw+Clw][0] = 12+(biome*16)
+    chunks[0][Clh/2] = 7+(biome*16)
     #fill the room
     for x in range(Cpw+Clw-1):
         for y in range(Clh-1):
-            chunks[x+1][y+1] = 9
+            chunks[x+1][y+1] = 9+(biome*16)
             
     for x in range(Clw-1):
         for y in range(Cph):
-            chunks[Cpw+x+1][Clh+y] = 9
-    print "CHUNKS LOADED"
+            chunks[Cpw+x+1][Clh+y] = 9+(biome*16)
+    #print (biome)
 
     MAP = chunks
 
@@ -83,7 +88,8 @@ def startScreen():
     image(start,800,500)
     if (mouseX > 800-text1.width/2 and mouseX < 800+text1.width/2 and mouseY > 600-text1.height/2 and mouseY < 600+text1.height/2):
         print('balls')
-        image(text2,800, 600 )
+        image(text2,800,600)
+
 
     else:
         image(text1,800, 600 )
@@ -92,8 +98,20 @@ def startScreen():
         play = True
     
 
+
+    
+def switch():
+    if dir == 0:
+            image(up,width/2,height/2)
+    if dir == 1:
+            image(down,width/2,height/2)
+    if dir == 2:
+            image(right,width/2,height/2)
+    if dir == 3:
+            image(left,width/2,height/2)
+
 def draw():
-    print(mouseY)
+  #sad  print(mouseY)
     if (play == False):
         startScreen()
     else:
@@ -107,26 +125,35 @@ def draw():
             calcY = y-int(Yp/tilesize)
             for x in range((SX+tilesize)/tilesize):
                 image(newimg[MAP[calcY][x-int(Xp/tilesize)]],x*tilesize+ModXPrecalc,y*tilesize+ModYPrecalc)
-       
+        switch()
+                
 def keyPressed():
     #print key
-    global xspeed, yspeed
+    global xspeed, yspeed, dir
     if key == 'w':
         yspeed = speed
+        dir = 0
     if key == 's':
         yspeed = -speed
+        dir = 1
     if key == 'a':
         xspeed = speed
+        dir = 3
     if key == 'd':
         xspeed = -speed
+        dir = 2
     if key == 'W':
         yspeed = speed+3
+        dir = 0
     if key == 'S':
         yspeed = -speed-3
+        dir = 1
     if key == 'A':
         xspeed = speed+3
+        dir = 3
     if key == 'D':
         xspeed = -speed-3
+        dir = 2
 def keyReleased():
     global xspeed, yspeed
     if key == 'w' or key == 's' or key == 'W' or key == 'S':
