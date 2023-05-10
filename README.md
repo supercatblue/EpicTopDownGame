@@ -18,6 +18,7 @@
 
 ## Cole Cram
 Project Manager/Developer
+Made engine
 
 ## Xarek Lyman
 ### Multimedea Creator/ Implementor
@@ -29,6 +30,7 @@ Game Developer
 
 ## Alex Neeley
 Game Tester
+Github updater
 
 ## Jano Oyarzurn
 UI/UX
