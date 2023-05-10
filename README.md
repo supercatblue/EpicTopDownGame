@@ -11,7 +11,7 @@
 
 ## Game code
 
-[RUNABLE GAME CODE](https://github.com/supercatblue/EpicTopDownGame/blob/main/2nd_Game.rpg/code/test.txt)
+[RUNABLE GAME CODE]
 
 
 # Jobs
