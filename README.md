@@ -7,7 +7,7 @@
 
 # Room generation
 
-![in-game]Game/plan+sudocode/IMG_6207.HEIC
+![in-game](Game/plan+sudocode/IMG_6207.HEIC)
 ## Game code
 
 [RUNABLE GAME CODE]
