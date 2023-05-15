@@ -8,6 +8,7 @@
 # Room generation
 
 ![in-game](Game/plan+sudocode/IMG_6207.HEIC)
+sorry screenshot was not working
 ## Game code
 
 [RUNABLE GAME CODE]
