@@ -1,5 +1,5 @@
 ![Logo]#(https://github.com/supercatblue/EpicTopDownGame/edit/main/README.md)
-plan for game 
+# plan for game 
 
 
 ![Class list](https://github.com/supercatblue/EpicTopDownGame/blob/main/Game/plan%2Bsudocode/plan1.drawio.png)
