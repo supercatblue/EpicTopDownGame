@@ -1,4 +1,4 @@
-![Logo](https://github.com/supercatblue/EpicTopDownGame/blob/main/Images/SUB-TERRA%20(2).png?raw=true)
+![Logo](Game/plan+sudocode/SUB-TERRA (3) (1).png)
 
 # plan for game 
 
