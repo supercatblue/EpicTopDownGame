@@ -1,4 +1,4 @@
-![Logo]#(https://github.com/supercatblue/EpicTopDownGame/edit/main/README.md)
+![Logo]#
 # plan for game 
 
 
