@@ -7,8 +7,7 @@
 
 # Room generation
 
-![in-game](https://github.com/supercatblue/EpicTopDownGame/blob/main/Images/Screen%20Shot%202023-04-28%20at%2012.51.42%20PM.png?raw=true)
-
+![in-game]Game/plan+sudocode/IMG_6207.HEIC
 ## Game code
 
 [RUNABLE GAME CODE]
