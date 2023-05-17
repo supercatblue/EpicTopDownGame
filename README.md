@@ -6,7 +6,7 @@
 
 # Room generation
 
-![in-game](Game/plan+sudocode/IMG_6207.HEIC)
+![in-game]([Game/plan+sudocode/IMG_6207.HEIC](https://github.com/supercatblue/EpicTopDownGame/blob/main/Game/plan+sudocode/SUB-TERRA%20(3)%20(1).png?raw=true))
 sorry screenshot was not working
 ## Game code
 
