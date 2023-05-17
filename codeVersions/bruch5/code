@@ -3,10 +3,11 @@ def setup():
     imageMode(CENTER)
     size(1600,1000)
     frameRate(120)
-    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir, fix
+    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir, fix, wdith
     mapdraw = 1
     speed = 2
     fix = 1
+    wdith = 5
     img = loadImage("FINISHED TILESET (1) (1).png")
     start = loadImage("SUB-TERRA (3).png")
     text1 = loadImage("start.png")
@@ -64,33 +65,33 @@ def createRoom(z):
     print biome
     
     for y in range(Clh):
-        chunks[0][y][0] = 5+(biome*16)
+        chunks[0+wdith][y][0] = 5+(biome*16)
     for x in range(Cpw):
-        chunks[x][Clh][0] = 10+(biome*16)
+        chunks[x+wdith][Clh][0] = 10+(biome*16)
     for y in range(Cph):
-        chunks[Cpw][Clh+y][0] = 5+(biome*16)
+        chunks[Cpw+wdith][Clh+y][0] = 5+(biome*16)
     for x in range(Clw):
-        chunks[Cpw+x][Clh+Cph][0] = 10+(biome*16)
+        chunks[Cpw+x+wdith][Clh+Cph][0] = 10+(biome*16)
     for y in range(Cph+Clh):
-        chunks[Cpw+Clw][(Clh+Cph)-y][0] = 13+(biome*16)
+        chunks[Cpw+Clw+wdith][(Clh+Cph)-y][0] = 13+(biome*16)
     for x in range(Cpw+Clw+1):
-        chunks[x][0][0] = 8+(biome*16)
+        chunks[x+wdith][0][0] = 8+(biome*16)
     #make the corners into corners
-    chunks[0][0][0] = 4+(biome*16)
-    chunks[0][Clh][0] = 6+(biome*16)
-    chunks[Cpw][Clh][0] = 9+(biome*16)
-    chunks[Cpw][Cph+Clh][0] = 6+(biome*16)
-    chunks[Cpw+Clw][Cph+Clh][0] = 14+(biome*16)
-    chunks[Cpw+Clw][0][0] = 12+(biome*16)
-    chunks[0][Clh/2][0] = 7+(biome*16)
+    chunks[wdith][0][0] = 4+(biome*16)
+    chunks[wdith][Clh][0] = 6+(biome*16)
+    chunks[wdith+Cpw][Clh][0] = 9+(biome*16)
+    chunks[wdith+Cpw][Cph+Clh][0] = 6+(biome*16)
+    chunks[wdith+Cpw+Clw][Cph+Clh][0] = 14+(biome*16)
+    chunks[wdith+Cpw+Clw][0][0] = 12+(biome*16)
+    chunks[wdith][Clh/2][0] = 7+(biome*16)
         #fill the room
     for x in range(Cpw+Clw-1):
         for y in range(Clh-1):
-            chunks[x+1][y+1][0] = 9+(biome*16)
+            chunks[wdith+x+1][y+1][0] = 9+(biome*16)
             
     for x in range(Clw-1):
         for y in range(Cph):
-            chunks[Cpw+x+1][Clh+y][0] = 9+(biome*16)
+            chunks[wdith+Cpw+x+1][Clh+y][0] = 9+(biome*16)
 
     #MAP[x][y]
 def startScreen():
@@ -125,7 +126,7 @@ def switch():
             image(left,width/2,height/2)
 
 def draw():
-    global fix
+    global fix, wdith
   #sad  print(mouseY)
     # if (play == False):
     #     startScreen()
@@ -138,6 +139,7 @@ def draw():
             for y in range(len(chunks[0])):
                 for x in range(len(chunks[0][0])):
                     MAP[x+(z*30)][y+(z*30)] = chunks[x][y][z]
+        wdith += 22
         fix += 1
     global Xp, Yp
     #print Xp, Yp
