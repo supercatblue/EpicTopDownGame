@@ -186,4 +186,3 @@ def keyReleased():
         yspeed = 0
     if key == 'a' or key == 'd' or key == 'A' or key == 'S':
         xspeed = 0
-
