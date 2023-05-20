@@ -10,7 +10,9 @@
 sorry screenshot was not working
 ## Game code
 
-![link to zip file](https://github.com/supercatblue/EpicTopDownGame/blob/main/Game/plan%2Bsudocode/sub_terra.zip)
+# link to zip file
+
+(https://github.com/supercatblue/EpicTopDownGame/blob/main/Game/plan%2Bsudocode/sub_terra.zip)
 
 # Sadly, we were not able to completeley finish the game as we bit off a bit more than we could chew
 
