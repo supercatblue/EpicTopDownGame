@@ -12,6 +12,7 @@ sorry screenshot was not working
 
 [RUNABLE GAME CODE]
 
+# Sadly, we were not able to completeley finish the game as we bit off a bit more than we could chew
 
 # Jobs
 
@@ -39,4 +40,3 @@ UI/UX
 
 ### Platform 
 Processing Python
-
