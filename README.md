@@ -21,8 +21,10 @@ Made engine
 
 ## Xarek Lyman
 ### Multimedea Creator/ Implementor
-### All Graphics and sound
+### All Graphics
 ### Start screen logic
+### Debugging random room generation
+### provided assistance to other developers
 
 ## Benjamin Bigwood
 Game Developer
