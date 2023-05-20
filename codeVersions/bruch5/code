@@ -3,11 +3,9 @@ def setup():
     imageMode(CENTER)
     size(1600,1000)
     frameRate(120)
-    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir, fix, wdith
+    global img, tilesize, IsX, IsY, Xp, Yp, MAP, newimg, xspeed, yspeed, speed, chunks, newimg, Cpw, Cph, Clw, Clh, mapdraw, start, text1, text2, play, on, biome, character, up, down, right, left, dir
     mapdraw = 1
     speed = 2
-    fix = 1
-    wdith = 5
     img = loadImage("FINISHED TILESET (1) (1).png")
     start = loadImage("SUB-TERRA (3).png")
     text1 = loadImage("start.png")
@@ -19,7 +17,6 @@ def setup():
     left = loadImage("left.png")
     play = False
     on  = False
-    
     #each image is 10x original size
     xspeed = 0
     yspeed = 0
@@ -31,26 +28,13 @@ def setup():
     #start screen
     
     
-    #sets up map arrays, loads images
-    MAP = [[0 for x in range(1000)] for y in range(1000)]
-    #print("map loaded")
-    chunks = [[[0 for x in range(30)] for y in range(30)] for z in range(30)]
+    
+    MAP = [[0 for x in range(60)] for y in range(60)]
+    chunks = [[0 for x in range(30)] for y in range(30)]
     newimg = [0 for x in range(IsX*IsY)]
     for y in range(IsY):
         for x in range(IsX):
             newimg[x+(y*IsX)] = img.get(x*tilesize,y*tilesize,tilesize,tilesize)
-
-    
-
-    #print (biome)
-    
-
-def createRoom(z):
-    global chunks
-    #Cpw is
-    #Cph is
-    #Clh is
-    #Clw is
     Cpw = int(random(2,10))
     Cph = int(random(2,10))
     Clh = int(random(2,10))
@@ -61,39 +45,39 @@ def createRoom(z):
     print Cph
     
     biome = int(random(0,4))
-    
-    print biome
-    
     for y in range(Clh):
-        chunks[0+wdith][y][0] = 5+(biome*16)
+        chunks[0][y] = 5+(biome*16)
     for x in range(Cpw):
-        chunks[x+wdith][Clh][0] = 10+(biome*16)
+        chunks[x][Clh] = 10+(biome*16)
     for y in range(Cph):
-        chunks[Cpw+wdith][Clh+y][0] = 5+(biome*16)
+        chunks[Cpw][Clh+y] = 5+(biome*16)
     for x in range(Clw):
-        chunks[Cpw+x+wdith][Clh+Cph][0] = 10+(biome*16)
+        chunks[Cpw+x][Clh+Cph] = 10+(biome*16)
     for y in range(Cph+Clh):
-        chunks[Cpw+Clw+wdith][(Clh+Cph)-y][0] = 13+(biome*16)
+        chunks[Cpw+Clw][(Clh+Cph)-y] = 13+(biome*16)
     for x in range(Cpw+Clw+1):
-        chunks[x+wdith][0][0] = 8+(biome*16)
+        chunks[x][0] = 8+(biome*16)
     #make the corners into corners
-    chunks[wdith][0][0] = 4+(biome*16)
-    chunks[wdith][Clh][0] = 6+(biome*16)
-    chunks[wdith+Cpw][Clh][0] = 9+(biome*16)
-    chunks[wdith+Cpw][Cph+Clh][0] = 6+(biome*16)
-    chunks[wdith+Cpw+Clw][Cph+Clh][0] = 14+(biome*16)
-    chunks[wdith+Cpw+Clw][0][0] = 12+(biome*16)
-    chunks[wdith][Clh/2][0] = 7+(biome*16)
-        #fill the room
+    
+    chunks[0][0] = 4+(biome*16)
+    chunks[0][Clh] = 6+(biome*16)
+    chunks[Cpw][Clh] = 9+(biome*16)
+    chunks[Cpw][Cph+Clh] = 6+(biome*16)
+    chunks[Cpw+Clw][Cph+Clh] = 14+(biome*16)
+    chunks[Cpw+Clw][0] = 12+(biome*16)
+    chunks[0][Clh/2] = 7+(biome*16)
+    #fill the room
     for x in range(Cpw+Clw-1):
         for y in range(Clh-1):
-            chunks[wdith+x+1][y+1][0] = 9+(biome*16)
+            chunks[x+1][y+1] = 9+(biome*16)
             
     for x in range(Clw-1):
         for y in range(Cph):
-            chunks[wdith+Cpw+x+1][Clh+y][0] = 9+(biome*16)
+            chunks[Cpw+x+1][Clh+y] = 9+(biome*16)
+    #print (biome)
 
-    #MAP[x][y]
+    MAP = chunks
+
 def startScreen():
     global play
     global on
@@ -103,6 +87,7 @@ def startScreen():
     textSize(20)
     image(start,800,500)
     if (mouseX > 800-text1.width/2 and mouseX < 800+text1.width/2 and mouseY > 600-text1.height/2 and mouseY < 600+text1.height/2):
+        print('balls')
         image(text2,800,600)
 
 
@@ -126,34 +111,21 @@ def switch():
             image(left,width/2,height/2)
 
 def draw():
-    global fix, wdith
   #sad  print(mouseY)
-    # if (play == False):
-    #     startScreen()
-    # else:
-
-    if(fix == 1):
-        for z in range(len(chunks)):
-            createRoom(z)
-        for z in range(len(chunks)):
-            for y in range(len(chunks[0])):
-                for x in range(len(chunks[0][0])):
-                    MAP[x+(z*30)][y+(z*30)] = chunks[x][y][z]
-        wdith += 22
-        fix += 1
-    global Xp, Yp
-    #print Xp, Yp
-    Xp += xspeed
-    Yp += yspeed
-    ModXPrecalc = ((Xp%tilesize)-tilesize)+int(Xp/tilesize)
-    ModYPrecalc = (Yp%tilesize)-tilesize
-    for y in range((SY+tilesize)/tilesize):
-        calcY = y-int(Yp/tilesize)
-        for x in range(1+(SX+tilesize)/tilesize):
-            image(newimg[MAP[calcY][x-int(Xp/tilesize)]],x*tilesize+ModXPrecalc,y*tilesize+ModYPrecalc)
-    image(down,width/2,height/2)
-    switch()
-
+    if (play == False):
+        startScreen()
+    else:
+        global Xp, Yp
+        #print Xp, Yp
+        Xp += xspeed
+        Yp += yspeed
+        ModXPrecalc = ((Xp%tilesize)-tilesize)+int(Xp/tilesize)
+        ModYPrecalc = (Yp%tilesize)-tilesize
+        for y in range((SY+tilesize)/tilesize):
+            calcY = y-int(Yp/tilesize)
+            for x in range((SX+tilesize)/tilesize):
+                image(newimg[MAP[calcY][x-int(Xp/tilesize)]],x*tilesize+ModXPrecalc,y*tilesize+ModYPrecalc)
+        switch()
                 
 def keyPressed():
     #print key
@@ -188,3 +160,4 @@ def keyReleased():
         yspeed = 0
     if key == 'a' or key == 'd' or key == 'A' or key == 'S':
         xspeed = 0
+
