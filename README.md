@@ -12,7 +12,7 @@ sorry screenshot was not working
 
 # link to code versions and zip files
 
-(https://github.com/supercatblue/EpicTopDownGame/blob/main/codeVersions/bruch6_0_pyde-20230524T172113Z-001.zip)
+(https://github.com/supercatblue/EpicTopDownGame/tree/main/codeVersions)
 
 # Sadly, the game is still buggy and under development
 
