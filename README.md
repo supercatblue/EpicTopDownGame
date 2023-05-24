@@ -10,7 +10,7 @@
 sorry screenshot was not working
 ## Game code
 
-# link to zip file
+# link to code versions and zip files
 
 (https://github.com/supercatblue/EpicTopDownGame/blob/main/codeVersions/bruch6_0_pyde-20230524T172113Z-001.zip)
 
