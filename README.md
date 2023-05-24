@@ -20,7 +20,9 @@ sorry screenshot was not working
 
 ## Cole Cram
 Project Manager/Developer
+Ghost pathfinding
 Made engine
+Room generation
 
 ## Xarek Lyman
 ### Multimedea Creator/ Implementor
@@ -33,11 +35,13 @@ Made engine
 
 ## Benjamin Bigwood
 Game Developer
+ghost logic
+map design
 
 ## Alex Neeley
 Game Tester
 Github updater
-
+item art
 ## Jano Oyarzurn
 UI/UX
 
