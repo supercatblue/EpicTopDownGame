@@ -14,7 +14,7 @@ sorry screenshot was not working
 
 (https://github.com/supercatblue/EpicTopDownGame/blob/main/codeVersions/bruch6_0_pyde-20230524T172113Z-001.zip)
 
-# Sadly, we were not able to completeley finish the game as we bit off a bit more than we could chew
+# Sadly, the game is still buggy and under development
 
 # Jobs
 
